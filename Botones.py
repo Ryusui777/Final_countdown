@@ -6,7 +6,7 @@ pygame.init()
 width, hight= 900, 900
 screen = pygame.display.set_mode((width, hight))
 pygame.display.set_caption("Boton")
-main_font = pygame.font.SysFont("cambria",40)
+main_font = pygame.font.SysFont("cambria", 60)
 
 class Button(): 
     def __init__ (self, image, x_pos, y_pos, text_input):
