@@ -1,52 +1,34 @@
 import pygame
 import sys
 
-pygame.init()
 
-width, hight= 900, 900
-screen = pygame.display.set_mode((width, hight))
-pygame.display.set_caption("Boton")
-main_font = pygame.font.SysFont("cambria", 60)
+class Button():
+	def __init__(self, imagen, posicion, texto_entrada, fuente, color_base, hovering_color):
+		self.imagen = imagen
+		self.x_pos = posicion[0]
+		self.y_pos = posicion[1]
+		self.fuente = fuente
+		self.color_base, self.hovering_color = color_base, hovering_color
+		self.texto_entrada = texto_entrada
+		self.texto = self.font.render(self.texto_entrada, True, self.color_base)
+		if self.imagen is None:
+			self.imagne = self.texto
+		self.rect = self.imagen.get_rect(center=(self.x_pos, self.y_pos))
+		self.texto_rect = self.texto.get_rect(center=(self.x_pos, self.y_pos))
 
-class Button(): 
-    def __init__ (self, image, x_pos, y_pos, text_input):
-        self.image= image
-        self.x_pos= x_pos
-        self.y_pos= y_pos
-        self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
-        self.text_input = text_input
-        self.text = main_font.render(self.text_input,True, "White")
-        self.text_rect= self.text.get_rect(center=(self.x_pos, self.y_pos))
-       
-    def update(self):
-        screen.blit(self.image, self.rect)
-        screen.blit(self.text, self.text_rect)
-    
-    def verificarInput(self, position):
-        if position[0] in range(self.rect.left, self.rect.right) and position [1] in range (self.rect.top, self.rect.bottom):
-         print("Boton presionado")
-    
-    def cambiarColor(self, position):
-        if position[0] in range(self.rect.left, self.rect.right) and position [1] in range (self.rect.top, self.rect.bottom):
-            self.text= main_font.render(self.text_input,True, "purple")
-        else:
-            self.text= main_font.render(self.text_input,True, "white")
+	def actualizar(self, screen):
+		if self.imagen is not None:
+			screen.blit(self.imagen, self.rect)
+		screen.blit(self.texto, self.texto_rect)
 
+	def verificar_input(self, posicion):
+		if posicion[0] in range(self.rect.left, self.rect.right) and posicion[1] in range(self.rect.top, self.rect.bottom):
+			return True
+		return False
 
-SuperficieBoton= pygame.image.load("buttons.png")
-SuperficieBoton=pygame.transform.scale(SuperficieBoton,(300, 100))
+	def cambiar_color(self, posicion):
+		if posicion[0] in range(self.rect.left, self.rect.right) and posicion[1] in range(self.rect.top, self.rect.bottom):
+			self.text = self.fuente.render(self.text_input, True, self.hovering_color)
+		else:
+			self.text = self.fuente.render(self.text_input, True, self.color_base)
 
-Boton= Button(SuperficieBoton,450, 450, "Start")
-
-while True:
-    for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            Boton.verificarInput(pygame.mouse.get_pos())
-    
-    screen.fill("Blue")
-    Boton.update()
-    Boton.cambiarColor(pygame.mouse.get_pos())
-    pygame.display.update()
