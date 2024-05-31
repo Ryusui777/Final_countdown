@@ -12,6 +12,69 @@ fondo=pygame.transform.scale(pygame.image.load( "FondoPerosnajes.jpg"), (WIDHT, 
 def letra(size):
     return pygame.font.Font("assents/font.ttf", size)
 
+def Jugar():
+    pygame.display.set_caption("Jugar")
+
+    while True:
+        posicion_del_mouse_jugar= pygame.mouse.get_pos()
+        window.fill("Black")
+
+        jugar_texto= letra(45).render("Esta ventana redirige al juego", True, "White")
+        jugar_rect= jugar_texto.get_rect(centro= (640, 260))
+        window.blit( jugar_texto, jugar_rect )
+
+        jugar_volver= Button(imagen=None, posicion=(640,460), texto_entrada= "Volver", fuente= letra(75), color_base= "White", hovering_color="Green")
+
+        jugar_volver.cambiar_color(posicion_del_mouse_jugar)
+        jugar_volver.actualizar(window)
+
+        for evento in pygame.event.get():
+            if evento.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if evento.type == pygame.MOUSEBUTTONDOWN:
+                if jugar_volver.verificar_input(posicion_del_mouse_jugar):
+                    menu_principal()
+                    
+        pygame.display.update()
+
+    
+def Reglas():
+    pygame.display.set_caption("Reglas")
+
+    while True:
+        posicion_del_mouse_jugar= pygame.mouse.get_pos()
+        window.fill("Black")
+
+        jugar_texto= letra(45).render("Esta ventana redirige al juego", True, "White")
+        jugar_rect= jugar_texto.get_rect(centro= (640, 260))
+        window.blit( jugar_texto, jugar_rect )
+
+        jugar_volver= Button(imagen=None, posicion=(640,460), texto_entrada= "Volver", fuente= letra(75), color_base= "White", hovering_color="Green")
+
+        jugar_volver.cambiar_color(posicion_del_mouse_jugar)
+        jugar_volver.actualizar(window)
+
+        for evento in pygame.event.get():
+            if evento.type==pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if evento.type == pygame.MOUSEBUTTONDOWN:
+                if jugar_volver.verificar_input(posicion_del_mouse_jugar):
+                    menu_principal()
+                    
+        pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
 def menu_principal():
     pygame.display.set_caption("Menu principal")
 
@@ -20,14 +83,14 @@ def menu_principal():
 
         posicion_del_mouse_menu= pygame.mouse.get_pos()
 
-        menu_texto= letra(100).render("Menu Principal", True, "#b68f40")
+        menu_texto= letra(100).render("Menu Principal", True, "White")
         menu_rect= menu_texto.get_rect(centro= (640, 100))
 
-        boton_jugar= Button (image=pygame.image.load("assets/Play FondoPersonajes.png"), posicion=(640, 250), 
+        boton_jugar= Button (image=pygame.image.load("assets/Play rectangulo.png"), posicion=(640, 250), 
                             texto_entrada= "Jugar", fuente= letra(75), color_base= "Black", hovering_color="Green")
-        boton_reglas= Button (image=pygame.image.load("assets/Reglas FondoPersonajes.png"), posicion=(640, 400), 
+        boton_reglas= Button (image=pygame.image.load("assets/Reglas rectangulo.png"), posicion=(640, 400), 
                             texto_entrada= "Reglas", fuente= letra(75), color_base= "Black", hovering_color="Green")
-        boton_salir= Button (image=pygame.image.load("assets/Salir FondoPersonajes.png"), posicion=(640, 550), 
+        boton_salir= Button (image=pygame.image.load("assets/Salir rectangulo.png"), posicion=(640, 550), 
                             texto_entrada= "Salir", fuente= letra(75), color_base= "Black", hovering_color="Green")
     
         window.blit( menu_texto, menu_rect )
@@ -41,11 +104,11 @@ def menu_principal():
                 pygame.quit()
                 sys.exit()
             if evento.type == pygame.MOUSEBUTTONDOWN:
-                if boton_jugar.checkForInput(posicion_del_mouse_menu):
+                if boton_jugar.verificar_input(posicion_del_mouse_menu):
                     Jugar()
-                if boton_reglas.checkForInput(posicion_del_mouse_menu):
+                if boton_reglas.verificar_input(posicion_del_mouse_menu):
                     Reglas()
-                if boton_salir.checkForInput(posicion_del_mouse_menu):
+                if boton_salir.verificar_input(posicion_del_mouse_menu):
                     pygame.quit()
                     sys.exit()
 
