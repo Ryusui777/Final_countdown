@@ -7,7 +7,7 @@ pygame.init()
 WIDHT, HEIGHT= 1280,720
 window= pygame.display.set_mode((WIDHT, HEIGHT))
 pygame.display.set_caption("Mario 3")
-fondo=pygame.transform.scale(pygame.image.load( "FondoPersonajes.jpg"), (WIDHT, HEIGHT))
+fondo=pygame.transform.scale(pygame.image.load( "Pantalla Super Mario.jpeg"), (WIDHT, HEIGHT))
 
 def letra(size):
     return pygame.font.Font("font.ttf", size)
@@ -73,7 +73,7 @@ def menu_principal():
 
         posicion_del_mouse_menu= pygame.mouse.get_pos()
 
-        menu_texto= letra(80).render("Menu Principal", True, "White")
+        menu_texto= letra(70).render("Super Mario Bros", True, "White")
         menu_rect= menu_texto.get_rect(center= (640, 100))
 
         boton_jugar= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 250), 
