@@ -10,9 +10,9 @@ class Button():
 		self.fuente = fuente
 		self.color_base, self.hovering_color = color_base, hovering_color
 		self.texto_entrada = texto_entrada
-		self.texto = self.font.render(self.texto_entrada, True, self.color_base)
+		self.texto = self.fuente.render(self.texto_entrada, True, self.color_base)
 		if self.imagen is None:
-			self.imagne = self.texto
+			self.imagen = self.texto
 		self.rect = self.imagen.get_rect(center=(self.x_pos, self.y_pos))
 		self.texto_rect = self.texto.get_rect(center=(self.x_pos, self.y_pos))
 
