@@ -27,8 +27,8 @@ class Button():
 		return False
 
 	def cambiar_color(self, posicion):
-		if posicion[0] in range(self.rect.left, self.rect.right) and posicion[1] in range(self.rect.top, self.rect.bottom):
-			self.text = self.fuente.render(self.text_input, True, self.hovering_color)
+		if self.verificar_input(posicion):
+			self.texto = self.fuente.render(self.texto_entrada, True, self.hovering_color)
 		else:
-			self.text = self.fuente.render(self.text_input, True, self.color_base)
+			self.texto = self.fuente.render(self.texto_entrada, True, self.color_base)
 
