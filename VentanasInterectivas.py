@@ -87,7 +87,7 @@ def menu_principal():
         boton_reglas= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 400), 
                             texto_entrada= "Reglas", fuente= letra(75), color_base= "White", hovering_color="Green")
         boton_salir= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 550), 
-                            texto_entrada= "Salir", fuente= letra(75), color_base= "White", hovering_color="Green")
+                            texto_entrada= "Salir", fuente= letra(75), color_base= "White", hovering_color="Red")
     
         window.blit( SuperMario_imagen,SuperMario_rect,)
         window.blit(SuperMario_imagen2,SuperMario_rect2)
