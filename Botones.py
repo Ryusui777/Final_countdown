@@ -10,9 +10,9 @@ class Button():
 		self.fuente = fuente
 		self.color_base, self.hovering_color = color_base, hovering_color
 		self.texto_entrada = texto_entrada
-		self.texto = self.font.render(self.texto_entrada, True, self.color_base)
+		self.texto = self.fuente.render(self.texto_entrada, True, self.color_base)
 		if self.imagen is None:
-			self.imagne = self.texto
+			self.imagen = self.texto
 		self.rect = self.imagen.get_rect(center=(self.x_pos, self.y_pos))
 		self.texto_rect = self.texto.get_rect(center=(self.x_pos, self.y_pos))
 
@@ -27,8 +27,8 @@ class Button():
 		return False
 
 	def cambiar_color(self, posicion):
-		if posicion[0] in range(self.rect.left, self.rect.right) and posicion[1] in range(self.rect.top, self.rect.bottom):
-			self.text = self.fuente.render(self.text_input, True, self.hovering_color)
+		if self.verificar_input(posicion):
+			self.texto = self.fuente.render(self.texto_entrada, True, self.hovering_color)
 		else:
-			self.text = self.fuente.render(self.text_input, True, self.color_base)
+			self.texto = self.fuente.render(self.texto_entrada, True, self.color_base)
 

@@ -7,10 +7,10 @@ pygame.init()
 WIDHT, HEIGHT= 1280,720
 window= pygame.display.set_mode((WIDHT, HEIGHT))
 pygame.display.set_caption("Mario 3")
-fondo=pygame.transform.scale(pygame.image.load( "FondoPersonajes.jpg"), (WIDHT, HEIGHT))
+fondo=pygame.transform.scale(pygame.image.load( "Pantalla Super Mario.jpeg"), (WIDHT, HEIGHT))
 
 def letra(size):
-    return pygame.font.letra("font.ttf", size)
+    return pygame.font.Font("font.ttf", size)
 
 def Jugar():
     pygame.display.set_caption("Jugar")
@@ -19,7 +19,7 @@ def Jugar():
         posicion_del_mouse_jugar= pygame.mouse.get_pos()
         window.fill("Black")
 
-        jugar_texto= letra(45).render("Esta ventana redirige al juego", True, "White")
+        jugar_texto= letra(30).render("Esta ventana redirige al juego", True, "White")
         jugar_rect= jugar_texto.get_rect(center= (640, 260))
         window.blit( jugar_texto, jugar_rect )
 
@@ -46,7 +46,7 @@ def Reglas():
         posicion_del_mouse_reglas= pygame.mouse.get_pos()
         window.fill("white")
 
-        reglas_texto= letra(45).render("Esta ventana son las reglas del juego", True, "Black")
+        reglas_texto= letra(30).render("Esta ventana son las reglas del juego", True, "Black")
         reglas_rect= reglas_texto.get_rect(center= (640, 260))
         window.blit( reglas_texto, reglas_rect)
 
@@ -72,17 +72,25 @@ def menu_principal():
         window.blit(fondo,(0,0))
 
         posicion_del_mouse_menu= pygame.mouse.get_pos()
+        
+        SuperMario_imagen = pygame.image.load("Rect.png")
+        SuperMario_rect = SuperMario_imagen.get_rect(center=(350, 100 ))
 
-        menu_texto= letra(100).render("Menu Principal", True, "White")
+        SuperMario_imagen2 = pygame.image.load("Rect.png")
+        SuperMario_rect2 = SuperMario_imagen2.get_rect(center=(935, 100 ))
+
+        menu_texto= letra(70).render("Super Mario Bros", True, "White")
         menu_rect= menu_texto.get_rect(center= (640, 100))
 
         boton_jugar= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 250), 
-                            texto_entrada= "Jugar", fuente= letra(75), color_base= "Black", hovering_color="Green")
+                            texto_entrada= "Jugar", fuente= letra(75), color_base= "White", hovering_color="Green")
         boton_reglas= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 400), 
-                            texto_entrada= "Reglas", fuente= letra(75), color_base= "Black", hovering_color="Green")
+                            texto_entrada= "Reglas", fuente= letra(75), color_base= "White", hovering_color="Green")
         boton_salir= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 550), 
-                            texto_entrada= "Salir", fuente= letra(75), color_base= "Black", hovering_color="Green")
+                            texto_entrada= "Salir", fuente= letra(75), color_base= "White", hovering_color="Red")
     
+        window.blit( SuperMario_imagen,SuperMario_rect,)
+        window.blit(SuperMario_imagen2,SuperMario_rect2)
         window.blit( menu_texto, menu_rect )
 
         for button in [boton_jugar, boton_reglas, boton_salir]:
