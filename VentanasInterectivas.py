@@ -10,7 +10,7 @@ pygame.display.set_caption("Mario 3")
 fondo=pygame.transform.scale(pygame.image.load( "FondoPersonajes.jpg"), (WIDHT, HEIGHT))
 
 def letra(size):
-    return pygame.fuente.Font("font.ttf", size)
+    return pygame.font.letra("font.ttf", size)
 
 def Jugar():
     pygame.display.set_caption("Jugar")
