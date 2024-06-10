@@ -1,13 +1,17 @@
 import pygame
 import sys
 from Botones import Button
+from screeninfo import get_monitors
+
+resolution = get_monitors()
+print(resolution)
+resolution = (resolution[1].width-(resolution[1].width/384),resolution[1].height-(resolution[1].height/13.5))
 
 pygame.init()
 
-WIDHT, HEIGHT= 1280,720
-window= pygame.display.set_mode((WIDHT, HEIGHT))
+window= pygame.display.set_mode(resolution)
 pygame.display.set_caption("Mario 3")
-fondo=pygame.transform.scale(pygame.image.load( "Pantalla Super Mario.jpeg"), (WIDHT, HEIGHT))
+fondo=pygame.transform.scale(pygame.image.load( "Pantalla Super Mario.jpeg"), (resolution))
 
 def letra(size):
     return pygame.font.Font("font.ttf", size)
