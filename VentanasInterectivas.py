@@ -1,11 +1,20 @@
 import pygame
 import sys
 from Botones import Button
-from screeninfo import get_monitors
 
-resolution = get_monitors()
+def get_resolution() -> tuple:
+        
+        from screeninfo import get_monitors
+        screen = [monitor for monitor in get_monitors()]
+        print(screen)
+        for primary_screen in screen:
+            if primary_screen.is_primary:
+                size_tup = (primary_screen.width - (primary_screen.width / 384),
+                            primary_screen.height - (primary_screen.height / 13.5))
+                return size_tup
+
+resolution = get_resolution()
 print(resolution)
-resolution = (resolution[1].width-(resolution[1].width/384),resolution[1].height-(resolution[1].height/13.5))
 
 pygame.init()
 
@@ -18,56 +27,64 @@ def letra(size):
 
 def Jugar():
     pygame.display.set_caption("Jugar")
+    jugando = True
 
-    while True:
-        posicion_del_mouse_jugar= pygame.mouse.get_pos()
+    while jugando:
+        posicion_del_mouse_jugar = pygame.mouse.get_pos()
         window.fill("Black")
 
-        jugar_texto= letra(30).render("Esta ventana redirige al juego", True, "White")
-        jugar_rect= jugar_texto.get_rect(center= (640, 260))
-        window.blit( jugar_texto, jugar_rect )
+        jugar_texto = letra(30).render("Esta ventana redirige al juego", True, "White")
+        jugar_rect = jugar_texto.get_rect(center=(resolution[0] / 2, resolution[1] / 2 - 175))
+        window.blit(jugar_texto, jugar_rect)
 
-        jugar_volver= Button(imagen=None, posicion=(640,460), texto_entrada= "Volver", fuente= letra(75), color_base= "White", hovering_color="Green")
+        jugar_volver = Button(imagen=None, posicion=(resolution[0] / 2 - 720, resolution[1] / 2 + 400),
+                              texto_entrada="Volver", fuente=letra(50), color_base="White", hovering_color="Yellow")
 
         jugar_volver.cambiar_color(posicion_del_mouse_jugar)
         jugar_volver.actualizar(window)
 
         for evento in pygame.event.get():
-            if evento.type==pygame.QUIT:
+            if evento.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if jugar_volver.verificar_input(posicion_del_mouse_jugar):
-                    menu_principal()
-                    
+                    jugando = False
+
         pygame.display.update()
+
+    menu_principal()
 
     
 def Reglas():
     pygame.display.set_caption("Reglas")
+    reglas = True
 
-    while True:
-        posicion_del_mouse_reglas= pygame.mouse.get_pos()
+    while reglas:
+        posicion_del_mouse_reglas = pygame.mouse.get_pos()
         window.fill("white")
 
-        reglas_texto= letra(30).render("Esta ventana son las reglas del juego", True, "Black")
-        reglas_rect= reglas_texto.get_rect(center= (640, 260))
-        window.blit( reglas_texto, reglas_rect)
+        reglas_texto = letra(30).render("Esta ventana son las reglas del juego", True, "Black")
+        reglas_rect = reglas_texto.get_rect(center=(resolution[0] / 2, resolution[1] / 2 - 175))
+        window.blit(reglas_texto, reglas_rect)
 
-        reglas_volver= Button(imagen=None, posicion=(640,460), texto_entrada= "Volver", fuente= letra(75), color_base= "Black", hovering_color="Green")
+        reglas_volver = Button(imagen=None, posicion=(resolution[0] / 2 - 720, resolution[1] / 2 + 400),
+                               texto_entrada="Volver", fuente=letra(50), color_base="Black", hovering_color="Yellow")
 
         reglas_volver.cambiar_color(posicion_del_mouse_reglas)
         reglas_volver.actualizar(window)
 
         for evento in pygame.event.get():
-            if evento.type==pygame.QUIT:
+            if evento.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if reglas_volver.verificar_input(posicion_del_mouse_reglas):
-                    menu_principal()
-                    
+                    reglas = False
+
         pygame.display.update()
+
+    menu_principal()
 
 def menu_principal():
     pygame.display.set_caption("Menu principal")
@@ -78,19 +95,19 @@ def menu_principal():
         posicion_del_mouse_menu= pygame.mouse.get_pos()
         
         SuperMario_imagen = pygame.image.load("Rect.png")
-        SuperMario_rect = SuperMario_imagen.get_rect(center=(350, 100 ))
+        SuperMario_rect = SuperMario_imagen.get_rect(center=(645, 100 ))
 
         SuperMario_imagen2 = pygame.image.load("Rect.png")
-        SuperMario_rect2 = SuperMario_imagen2.get_rect(center=(935, 100 ))
+        SuperMario_rect2 = SuperMario_imagen2.get_rect(center=(1230, 100 ))
 
         menu_texto= letra(70).render("Super Mario Bros", True, "White")
-        menu_rect= menu_texto.get_rect(center= (640, 100))
+        menu_rect= menu_texto.get_rect(center= (resolution[0]/2,resolution[1]/2 - 400 ))
 
-        boton_jugar= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 250), 
+        boton_jugar= Button (imagen=pygame.image.load("Rect.png"), posicion=(resolution[0]/2,resolution[1]/2 - 175 ), 
                             texto_entrada= "Jugar", fuente= letra(75), color_base= "White", hovering_color="Green")
-        boton_reglas= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 400), 
+        boton_reglas= Button (imagen=pygame.image.load("Rect.png"), posicion=(resolution[0]/2,resolution[1]/2), 
                             texto_entrada= "Reglas", fuente= letra(75), color_base= "White", hovering_color="Purple")
-        boton_salir= Button (imagen=pygame.image.load("Rect.png"), posicion=(640, 550), 
+        boton_salir= Button (imagen=pygame.image.load("Rect.png"), posicion=(resolution[0]/2,resolution[1]/2 + 175), 
                             texto_entrada= "Salir", fuente= letra(75), color_base= "White", hovering_color="Red")
     
         window.blit( SuperMario_imagen,SuperMario_rect,)
