@@ -87,9 +87,9 @@ if __name__ == '__main__':
     import pygame
     import Player
 
-    player_1 = Player.Player('Luigi')
-    player_2 = Player.Player('Mario')
-    player_3 = Player.Player('Sonic')
+    player_1 = Player.Player()
+    player_2 = Player.Player()
+    player_3 = Player.Player()
     win = SelectWindow()
     players = [player_1, player_3, player_2]
     run = 1
