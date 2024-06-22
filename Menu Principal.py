@@ -2,6 +2,8 @@ import pygame
 import sys
 from Botones import Button
 from screeninfo import get_monitors
+from char_select_win import SelectWindow  # Importar SelectWindow
+import Player
 
 def get_resolution() -> tuple:
     screen = [monitor for monitor in get_monitors()]
@@ -31,14 +33,15 @@ class Game:
         self.states = {
             "Menu_principal": self.menu_principal,
             "Start": self.videojuego,
-            "Reglas": self.reglas
+            "Reglas": self.reglas,
+            "Char_Select": self.char_select_win  # Nuevo estado
         }
 
     def set_state(self, new_state):
         self.state = new_state
 
     def menu_principal(self):
-        BG = pygame.transform.scale(pygame.image.load("Pantalla Super Mario.jpeg"), resolution)
+        BG = pygame.transform.scale(pygame.image.load("Assets/bg/Select_screen.png"), resolution)
         boton_jugar = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2 - 175), texto_entrada="Jugar", fuente=letra(75), color_base="White", hovering_color="Green")
         boton_reglas = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2), texto_entrada="Reglas", fuente=letra(75), color_base="White", hovering_color="Purple")
         boton_salir = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2 + 175), texto_entrada="Salir", fuente=letra(75), color_base="White", hovering_color="Red")
@@ -61,7 +64,7 @@ class Game:
                     sys.exit()
                 if evento.type == pygame.MOUSEBUTTONDOWN:
                     if boton_jugar.verificar_input(mouse_pos):
-                        self.set_state("Start")
+                        self.set_state("Char_Select")  # Cambiar al nuevo estado
                         return
                     if boton_reglas.verificar_input(mouse_pos):
                         self.set_state("Reglas")
@@ -71,11 +74,31 @@ class Game:
                         sys.exit()
             pygame.display.update()
 
+    def char_select_win(self):
+        win = SelectWindow()
+        players = [Player.Player(), Player.Player(), Player.Player()]
+        run = True
+        clock = pygame.time.Clock()
+        
+        while self.state == "Char_Select":
+            clock.tick(24)
+            loaded_players = [player.selection_character_give_frame() for player in players]
+            win.refresh(loaded_players)
+            
+            for evento in pygame.event.get():
+                if evento.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if evento.type == pygame.MOUSEBUTTONDOWN:
+                    # Aquí puedes manejar las selecciones de personajes y transiciones posteriores
+                    pass
+
+            pygame.display.update()
+
     def videojuego(self):
         BG = pygame.transform.scale(pygame.image.load("BranyDavid.jpg"), resolution)
         videojuego_volver = Button(imagen=None, posicion=(resolution[0] / 2 - 720, resolution[1] / 2 + 400),
                               texto_entrada="Volver", fuente=letra(50), color_base="White", hovering_color="Yellow")
-
 
         while self.state == "Start":
             self.screen.blit(BG, (0, 0))
