@@ -1,4 +1,3 @@
-
 class Player:
     import pygame
     import os

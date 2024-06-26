@@ -104,6 +104,9 @@ class Game:
         boton_volver = Button(imagen=None, posicion=(resolution[0] / 2 - 720, resolution[1] / 2 + 400),
                                texto_entrada="Volver", fuente=letra(50), color_base="white", hovering_color="Yellow")
         
+        boton_iniciar = Button(imagen=None, posicion=(resolution[0] / 2 + 720, resolution[1] / 2 +400 ),
+                               texto_entrada="Iniciar", fuente=letra(50), color_base="white", hovering_color="Green")
+        
         while self.state == "Char_Select":
             clock.tick(24)
             loaded_players = [player.selection_character_give_frame() for player in players]
@@ -111,7 +114,7 @@ class Game:
             
             mouse_pos = pygame.mouse.get_pos()
             
-            for button in [boton_mas,boton_menos,boton_derecha,boton_izquierda, boton_volver]:
+            for button in [boton_mas,boton_menos,boton_derecha,boton_izquierda, boton_volver,boton_iniciar]:
                 button.cambiar_color(mouse_pos)
                 button.actualizar(win.window_object)
             
