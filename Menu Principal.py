@@ -19,7 +19,6 @@ print(resolution)
 pygame.init()
 window = pygame.display.set_mode(resolution)
 pygame.display.set_caption("Mario 3")
-fondo = pygame.transform.scale(pygame.image.load("Pantalla Super Mario.jpeg"), resolution)
 
 def letra(size):
     return pygame.font.Font("font.ttf", size)
@@ -47,7 +46,7 @@ class Game:
 
         while self.state == "Menu_principal":
             self.screen.blit(BG, (0, 0))
-            menu_texto = letra(70).render("Super Mario Bros", True, "White")
+            menu_texto = letra(70).render("Mario's Journey", True, "White")
             menu_rect = menu_texto.get_rect(center=(resolution[0] / 2, resolution[1] / 2 - 400))
             self.screen.blit(menu_texto, menu_rect)
             
