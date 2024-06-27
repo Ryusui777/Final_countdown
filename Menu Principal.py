@@ -42,7 +42,7 @@ class Game:
     def menu_principal(self):
         BG = pygame.transform.scale(pygame.image.load("Assets/bg/Select_screen.png"), resolution)
         boton_jugar = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2 - 175), texto_entrada="Jugar", fuente=letra(75), color_base="White", hovering_color="Green")
-        boton_reglas = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2), texto_entrada="Reglas", fuente=letra(75), color_base="White", hovering_color="Purple")
+        boton_reglas = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2), texto_entrada="Reglas", fuente=letra(75), color_base="White", hovering_color="yellow")
         boton_salir = Button(imagen=pygame.image.load("Rect.png"), posicion=(resolution[0] / 2, resolution[1] / 2 + 175), texto_entrada="Salir", fuente=letra(75), color_base="White", hovering_color="Red")
 
         while self.state == "Menu_principal":
@@ -130,16 +130,13 @@ class Game:
 
     def reglas(self):
         pygame.display.set_caption("Reglas")
-        reglas_volver = Button(imagen=None, posicion=(resolution[0] / 2 - 720, resolution[1] / 2 + 400),
-                               texto_entrada="Volver", fuente=letra(50), color_base="Black", hovering_color="Yellow")
+        BG = pygame.transform.scale(pygame.image.load("#1 (1).png"), resolution)
+        reglas_volver = Button(imagen=None, posicion=(resolution[0] / 2 - 730, resolution[1] / 2 + 430),
+                               texto_entrada="Volver", fuente=letra(50), color_base="white", hovering_color="Yellow")
 
         while self.state == "Reglas":
             mouse_pos = pygame.mouse.get_pos()
-            self.screen.fill("white")
-
-            reglas_texto = letra(30).render("Esta ventana son las reglas del juego", True, "Black")
-            reglas_rect = reglas_texto.get_rect(center=(resolution[0] / 2, resolution[1] / 2 - 175))
-            self.screen.blit(reglas_texto, reglas_rect)
+            self.screen.blit(BG, (0, 0))
 
             reglas_volver.cambiar_color(mouse_pos)
             reglas_volver.actualizar(self.screen)
